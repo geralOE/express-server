@@ -1,5 +1,5 @@
 // Get dependencies
-require('./config/config');
+const config = require('./config/config');
 
 const express = require('express');
 const path = require('path');
@@ -30,16 +30,6 @@ app.set('port', port);
 
 // Create HTTP Server
 const server = http.createServer(app);
-
-
-// const db = mongoose.connect(config.dbHost, (error, client) => {
-//       if(error) {
-//         console.log("Error mongoose connection! " + error)
-//       } 
-//     console.log("Connected to `" + config.database_name + "`!");
-// });
-
-
 
 
 // Start server
