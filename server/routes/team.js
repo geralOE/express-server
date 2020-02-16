@@ -4,9 +4,8 @@ const TeamController = require('../controllers/team_controller')
 
 var api = express.Router();
 
-
-var api = express.Router();
-
+// Get a team
+api.get('/team/detail/:id', TeamController.getTeam); 
 
 // Get all teams
 api.get( '/team' , TeamController.getTeams );

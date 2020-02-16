@@ -4,6 +4,29 @@ mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 const Team = require('../models/team_model');
 
+/**
+ * Method that Show a team 
+ */
+var getTeam =  ( req, res ) => {
+    let id = req.params.id;
+  
+    Team.findById(id, ( err, team ) => {
+      if( err ) {
+          return res.status(400).json({
+              ok: false,
+              err
+          });
+      }
+  
+      res.json({
+          ok: true,
+          data: team,
+          message: "Mostrando el equipo seleccionado",        
+      });
+      
+    });
+  };
+
 
 /*
 *   Method get all teams
@@ -115,6 +138,7 @@ var updateTeam  =  ( req, res ) => {
     });
 }
 
+module.exports.getTeam = getTeam;
 module.exports.getTeams = getTeams;
 module.exports.insertTeam = insertTeam;
 module.exports.deleteTeam = deleteTeam;
