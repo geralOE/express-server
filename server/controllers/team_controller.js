@@ -26,11 +26,14 @@ var getTeams =  ( req, res ) => {
                 });
             }
 
-            res.json({
-                ok: true,
-                data: teams,
-                message: "Mostrando equipos"
-
+            Team.count({ status: true }, ( err, count ) => {
+                res.json({
+                    ok: true,
+                    data: teams,
+                    message: "Mostrando equipos",
+                    count: count
+                    
+                })
             })
     })
 }
@@ -62,6 +65,57 @@ var insertTeam  =  ( req, res ) => {
 
 }
 
+/**
+ * Method Delete team
+ * only erase logical, ex. status = false
+ */
+var deleteTeam  =  ( req, res ) => {
+    let id = req.params.id
+    
+
+    
+    Team.findByIdAndUpdate(id, { status: false }, { new: true }, ( err, teamDB ) => {
+        
+        if( err ) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+         res.json({
+            ok: true,
+            data: teamDB,
+            message: "Se eliminó el team correctamente"
+        });
+    });
+}
+
+/*
+ * Method updateTeam team
+ */
+var updateTeam  =  ( req, res ) => {
+    let id = req.params.id
+    let body = req.body;    
+
+    Team.findByIdAndUpdate(id, {team_name: body.team_name}, { new: true, runValidators:true },  ( err, teamDB ) => {
+        
+        if( err ) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+         res.json({
+            ok: true,
+            data: teamDB,
+            message: "Se actualizó el team correctamente"
+        });
+    });
+}
 
 module.exports.getTeams = getTeams;
 module.exports.insertTeam = insertTeam;
+module.exports.deleteTeam = deleteTeam;
+module.exports.updateTeam = updateTeam;
