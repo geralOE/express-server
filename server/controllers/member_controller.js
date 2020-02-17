@@ -49,7 +49,7 @@ var getMembers =  ( req, res ) => {
               });
           }
 
-          Member.count({ status: true }, ( err, count ) => {
+          Member.countDocuments({ status: true }, ( err, count ) => {
               res.json({
                   ok: true,
                   data: members,
@@ -83,7 +83,7 @@ var getMembersTeam =  ( req, res ) => {
               });
           }
 
-          Member.count({team_id:id, status: true }, ( err, count ) => {
+          Member.countDocuments({team_id:id, status: true }, ( err, count ) => {
               res.json({
                   ok: true,
                   data: members,

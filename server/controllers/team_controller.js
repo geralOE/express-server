@@ -49,7 +49,7 @@ var getTeams =  ( req, res ) => {
                 });
             }
 
-            Team.count({ status: true }, ( err, count ) => {
+            Team.countDocuments({ status: true }, ( err, count ) => {
                 res.json({
                     ok: true,
                     data: teams,
