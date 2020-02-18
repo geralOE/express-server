@@ -19,7 +19,7 @@ var MemberSchema = new Schema({
             unique: true 
         }, 
         team_id: {
-            type: Schema.Types.ObjectId,
+            type: Schema.ObjectId,
             ref: 'Team'
         },
         reg_time: {

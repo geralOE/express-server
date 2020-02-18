@@ -10,7 +10,9 @@ const Member = require('../models/member_model');
 var getMember =  ( req, res ) => {
   let id = req.params.id;
 
-  Member.findById(id, ( err, member ) => {
+  Member.findById(id)
+  .populate('teams')
+  .exec( ( err, member ) => {
     if( err ) {
         return res.status(400).json({
             ok: false,
@@ -24,7 +26,8 @@ var getMember =  ( req, res ) => {
         message: "Mostrando el miembro seleccionado",        
     });
 
-  });
+  })
+
 };
 
 
